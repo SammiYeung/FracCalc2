@@ -24,15 +24,13 @@ public class FracCalc {
     public static String produceAnswer(String input){ 
     	String[] expression = input.split(" "); //separating the operands and operators
     	String operator = expression[1];
-    	int[] op1 = parseOperands(expression[0]);
-    	int[] op2 = parseOperands(expression[2]);
-    	int[] answerArray = parseOperands(doMath(op1, op2, operator));
+    	int[] answerArray = parseOperands(doMath(parseOperands(expression[0]), parseOperands(expression[2]), operator));
     	int gcf = gcf(answerArray[1], answerArray[2]);
     	String answer = "";
-    	if (gcf == 0) {
+    	if (gcf == 0) { //if the numerator or denominator is 0
     		answer += toMixedNum(answerArray[1], answerArray[2]);
     	}
-    	else {
+    	else { //if the numerator or denominator is not 0
     		answer += toMixedNum(answerArray[1]/gcf, answerArray[2]/gcf);
     	}
     	
@@ -43,7 +41,7 @@ public class FracCalc {
     	String whole;
     	String numerator;
     	String denominator;
-    	String[] splitOperand = operand.split("_");
+    	String[] splitOperand = operand.split("_"); //split wholes and fractions
     	if (splitOperand.length == 1) {
         	String[] splitFrac = splitOperand[0].split("/");
         	if (splitFrac.length == 1) { //no fraction
